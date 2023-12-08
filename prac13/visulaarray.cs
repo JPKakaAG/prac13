@@ -59,30 +59,69 @@ namespace prac13
                     array[i, j] = rnd.Next(0, 10);
                 }
             }
-        }
-       
+        }      
     }
-    [Serializable]
-    public class Matrix
+    public class MatrixManager
     {
-        public int[,] Data { get; set; }
-        public void SaveMatrix(Matrix matrix, string filePatch)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(Matrix));
+        private const string MatrixFilePath = "matrix.txt";
 
-            using (var stream = new StreamWriter(filePatch)) 
-            { 
-                serializer.Serialize(stream, matrix);
+        public void SaveMatrix(int[,] matrixData)
+        {
+            int rows = matrixData.GetLength(0);
+            int columns = matrixData.GetLength(1);
+
+            using (StreamWriter writer = new StreamWriter(MatrixFilePath))
+            {
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < columns; j++)
+                    {
+                        writer.Write(matrixData[i, j] + " ");
+                    }
+                    writer.WriteLine();
+                }
             }
         }
-        public Matrix OpenMatrix(string filePath)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(Matrix));
 
-            using(var stream = new StreamReader(filePath))
+        public int[,] LoadMatrix()
+        {
+            if (File.Exists(MatrixFilePath))
             {
-                return (Matrix)serializer.Deserialize(stream);
+                using (StreamReader reader = new StreamReader(MatrixFilePath))
+                {
+                    string[] firstLineValues = reader.ReadLine().Split(' ');
+                    int rows = 1;
+                    int columns = firstLineValues.Length - 1;
+
+                    while (!reader.EndOfStream)
+                    {
+                        reader.ReadLine();
+                        rows++;
+                    }
+
+                    int[,] matrixData = new int[rows, columns];
+                    int currentRow = 0;
+
+                    using (StreamReader newReader = new StreamReader(MatrixFilePath))
+                    {
+                        while (!newReader.EndOfStream)
+                        {
+                            string[] values = newReader.ReadLine().Split(' ');
+
+                            for (int j = 0; j < columns; j++)
+                            {
+                                matrixData[currentRow, j] = int.Parse(values[j]);
+                            }
+
+                            currentRow++;
+                        }
+                    }
+
+                    return matrixData;
+                }
             }
+
+            return null; // Если файл не существует или матрица не была сохранена, возвращаем null.
         }
     }
 }
