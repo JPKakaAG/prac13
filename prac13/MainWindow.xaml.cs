@@ -60,7 +60,7 @@ namespace prac13
         }
         private void ClearRezult_Click(object sender, RoutedEventArgs e)
         {
-            DGarray.Items.Clear();
+            DGarray.ItemsSource = null;
             tblStatus.Text = "";
         }
         private void btnCalculate_Click(object sender, RoutedEventArgs e)
@@ -75,7 +75,7 @@ namespace prac13
 
                     List<int> columnSums = new List<int>();
 
-                    for (int col = 1; col <= columns; col += 2)
+                    for (int col = 2; col <= columns; col += 2)
                     {
                         int sum = 0;
 

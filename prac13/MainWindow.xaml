@@ -39,7 +39,11 @@
                 <ColumnDefinition Width="93*"/>
                 <ColumnDefinition Width="109*"/>
             </Grid.ColumnDefinitions>
-
+            <ToolBar Grid.ColumnSpan="4" Grid.RowSpan="3">
+                <Button Click="btnExit_Click" ToolTip="Выход">
+                    <Image Source="/Shutdown.ico" Width="16" Height="16" />
+                </Button>
+            </ToolBar>
             <TextBox x:Name="tbRows" HorizontalAlignment="Center"  TextWrapping="Wrap" VerticalAlignment="Center" Width="73" Grid.Column="1" Grid.Row="1" Height="17" />
             <TextBox x:Name="tbColumn" Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="73" Grid.Row="1" Height="17"/>
             <Label Grid.Column="1" Content="Строки" HorizontalAlignment="Center" Width="49" Height="26" VerticalAlignment="Top" Grid.Row="1"/>

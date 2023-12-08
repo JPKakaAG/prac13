@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Xml.Serialization;
 
 namespace prac13
 {
@@ -55,6 +58,30 @@ namespace prac13
                 {
                     array[i, j] = rnd.Next(0, 10);
                 }
+            }
+        }
+       
+    }
+    [Serializable]
+    public class Matrix
+    {
+        public int[,] Data { get; set; }
+        public void SaveMatrix(Matrix matrix, string filePatch)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Matrix));
+
+            using (var stream = new StreamWriter(filePatch)) 
+            { 
+                serializer.Serialize(stream, matrix);
+            }
+        }
+        public Matrix OpenMatrix(string filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Matrix));
+
+            using(var stream = new StreamReader(filePath))
+            {
+                return (Matrix)serializer.Deserialize(stream);
             }
         }
     }
