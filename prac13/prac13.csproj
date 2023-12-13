@@ -98,5 +98,26 @@
   <ItemGroup>
     <Resource Include="Shutdown.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FLGRUS.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Help Document.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Calculator.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recycle Bin Empty.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Recycle Bin Empty2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Floppy Disk.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Closed Folder yellow.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -27,6 +28,9 @@ namespace prac13
         {
             InitializeComponent();
             InitializeContextMenu();
+
+            // Добавление обработчика события к событию SelectedCellsChanged
+            DGarray.SelectedCellsChanged += dataGrid_SelectedCellsChanged;
         }
         private void InitializeContextMenu()
         {
@@ -187,5 +191,18 @@ namespace prac13
         {
             MessageBox.Show("Выполнил лучший разработчик: Девяткин Вадим Евгеньевич\r\nПрактическая №13 \r\n\r\nДаны координаты двух противоположных вершин прямоугольника: (x1, y1), (x2, y2).\r\nСтороны прямоугольника параллельны осям координат. Найти периметр и площадь данного прямоугольника.\r\n\r\nДан размер файла в байтах. Используя операцию деления нацело, найти количество полных килобайтов, которые занимает данный файл (1 килобайт = 1024 байта)");
         }
+        private void dataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            // Получение размеров таблицы
+            int rows = DGarray.Items.Count - 1;
+            int columns = DGarray.Columns.Count;
+
+            // Получение номера выделенной ячейки
+            int selectedRow = DGarray.SelectedIndex;
+            int selectedColumn = DGarray.CurrentCell.Column.DisplayIndex;
+
+            // Обновление строки статуса
+            tblStatus.Text = $"Размер таблицы: {rows}x{columns} | Выделенная ячейка: [{selectedRow + 1}, {selectedColumn + 1}]";
+        }      
     }
 }
